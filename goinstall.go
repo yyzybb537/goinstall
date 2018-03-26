@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"fmt"
 	"os/exec"
 	"path/filepath"
 	"strings"
@@ -39,8 +40,9 @@ func walk(dirpath string, ifSymLink bool) {
 			}
 			installed[dir] = true
 			println("Process: go install", dir)
-			cmd := exec.Command("go", "install")
-			cmd.Dir = dir
+			//cmd := exec.Command("go", "install")
+			//cmd.Dir = dir
+			cmd := exec.Command("sh", "-c", fmt.Sprintf("cd %s && go install", dir))
 			cmd.Stdout = os.Stdout
 			cmd.Stderr = os.Stderr
 			err := cmd.Run()
